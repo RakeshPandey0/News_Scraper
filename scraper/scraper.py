@@ -2,20 +2,19 @@ import json
 import sys
 from importlib import import_module
 
+
 def load_website_scraper(website_name):
     try:
         # Load website configurations from JSON file
         with open('../config/websites.json') as f:
             website_configs = json.load(f)
 
-        # Check if website name exists in configurations
+        # Validate website name
         if website_name not in website_configs:
             raise ValueError(f"Invalid website name: {website_name}")
 
-        # Import the corresponding scraper module
-        scraper_module = import_module(f"{website_configs[website_name]['module']}")
-
-        # Call the scrape function from the imported module
+        # Import and call the scraper module
+        scraper_module = import_module(website_configs[website_name]['module'])
         scraper_module.scrape()
 
     except FileNotFoundError:
@@ -34,6 +33,7 @@ def load_website_scraper(website_name):
         print(f"An unexpected error occurred: {e}")
         sys.exit(1)
 
+
 def main():
     if len(sys.argv) != 2:
         print("Usage: python scraper.py [website_name]")
@@ -41,6 +41,7 @@ def main():
 
     website_name = sys.argv[1]
     load_website_scraper(website_name)
+
 
 if __name__ == "__main__":
     main()
