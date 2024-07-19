@@ -7,7 +7,7 @@ This project is designed to scrape news articles from various websites using a m
 To scrape a website, run the following command:
 
 ```bash
-python(or python3) main_scraper.py [website_name]
+python scraper.py [website_name]
 ```
 
 Replace `[website_name]` with the name of the website you want to scrape, as defined in `websites.json`. Example: 'ekantipur'
